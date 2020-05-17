@@ -23,7 +23,7 @@ Feature: Show records functionality
     Then show records default value should be 50
     And the users table must display 50 records
 
-  @wip
+#  @wip
   Scenario Outline: Show records for <count> options
     And I click on "Users" link
     When I select Show <count> records
