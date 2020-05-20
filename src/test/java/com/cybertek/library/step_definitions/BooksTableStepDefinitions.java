@@ -7,7 +7,9 @@ import com.cybertek.library.utilities.DBUtils;
 import io.cucumber.java.DataTableType;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.openqa.selenium.WebElement;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -111,5 +113,26 @@ public class BooksTableStepDefinitions {
     assertEquals("Description did not match",eDesc, aDesc);
 
 
+  }
+  @Then("book categories must match book_categories table from db")
+  public void book_categories_must_match_book_categories_table_from_db() {
+      //get expected categories from dB as list
+    String  sql  = "Select name FROM book_categories;";
+    List<Object> namesObj = DBUtils.getColumnData(sql,"name");
+    List<String> exNames = new ArrayList<>();
+    for (Object o : namesObj) {
+      exNames.add(o.toString());
+    }
+    System.out.println(exNames);
+
+    // get the actual categories from UI as webelements
+    // convert the web elements to list
+    List<WebElement>  optioan = booksPage.categoryMainList().getOptions();
+    List<String> acNames  = BrowserUtils.getElementsText(optioan);
+    System.out.println(acNames);
+    // remove the first option ALL from acList.
+    acNames.remove(0);
+    // compare 2 lists
+    assertEquals("Categories did not match",exNames,acNames);
   }
 }

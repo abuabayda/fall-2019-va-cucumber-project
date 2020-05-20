@@ -1,4 +1,4 @@
-@lib-2423 @smoke @regression
+a@lib-2423 @smoke @regression
 Feature: Search functionality on the users page
 
   Background:

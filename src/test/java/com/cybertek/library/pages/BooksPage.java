@@ -40,6 +40,9 @@ public class BooksPage extends PageBase {
     @FindBy(id="book_group_id")
     public WebElement catergoryElement;
 
+    @FindBy(id = "book_categories")
+    public WebElement mainCategoryElement;
+
     public WebElement editBook(String book) {
         String xpath = "//td[3][.='"+book+"']/../td/a";
         return Driver.getDriver().findElement(By.xpath(xpath));
@@ -47,6 +50,10 @@ public class BooksPage extends PageBase {
 
     public Select categoryList(){
         return new Select(catergoryElement);
+    }
+
+    public Select categoryMainList(){
+        return new Select(mainCategoryElement);
     }
 
 
